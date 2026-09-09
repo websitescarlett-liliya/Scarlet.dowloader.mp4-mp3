@@ -81,11 +81,18 @@ body {
     position: relative;
 }
 
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
 .profile-avatar-wrapper {
     position: relative;
-    width: 65px;
-    height: 65px;
-    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
@@ -113,6 +120,35 @@ body {
 
 .profile-avatar-wrapper:hover .avatar-overlay {
     opacity: 1;
+}
+
+.profile-name-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-color);
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-edit-name {
+    background: transparent;
+    border: none;
+    color: var(--primary-blue);
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.btn-edit-name:hover {
+    opacity: 0.8;
 }
 
 .title-wrapper { 
@@ -417,4 +453,4 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
+    }
