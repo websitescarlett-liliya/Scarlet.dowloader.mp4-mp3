@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scarlet Downloader MP4/MP3</title>
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Video Main -->
+    <video autoplay loop muted playsinline id="bg-video">
+        <source src="https://files.catbox.moe/7v6clb.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+
+    <!-- Container Utama -->
+    <div class="container scroll-anim">
+        
+        <!-- Header & Top Nav -->
+        <header class="header-card glass">
+            <!-- Edit Profile -->
+            <div class="profile-section">
+                <div class="profile-avatar-wrapper" id="profileBtn">
+                    <img src="https://via.placeholder.com/80" id="profileImage" alt="Profile">
+                    <div class="avatar-overlay"><i class="fas fa-camera"></i></div>
+                </div>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+            </div>
+
+            <!-- Title & Top Right Actions -->
+            <div class="title-wrapper">
+                <div class="title-row">
+                    <h1>Scarlet Downloader</h1>
+                    <button class="btn-akses-khusus magnetic">Akses Khusus</button>
+                </div>
+                <p>Download TikTok Video MP4 & Audio MP3 Tanpa Watermark</p>
+            </div>
+
+            <!-- Theme Switcher Button -->
+            <button class="theme-toggle magnetic" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <!-- Downloader Section -->
+        <main class="download-section glass">
+            <div class="input-group">
+                <i class="fas fa-link input-icon"></i>
+                <input type="text" id="tiktokUrl" placeholder="Tempel tautan video TikTok di sini...">
+                <button id="fetchBtn" class="btn-action magnetic">Cek Video</button>
+            </div>
+
+            <!-- Download Action Area with Video Background -->
+            <div class="video-btn-container hidden" id="downloadContainer">
+                <video autoplay loop muted playsinline class="btn-bg-video">
+                    <source src="https://videotourl.com/videos/1788955825601-e5d490db-190b-43c1-b25f-7ce954fb9da8.mp4" type="video/mp4">
+                </video>
+                <div class="video-btn-content">
+                    <!-- TikTok Author Info -->
+                    <div class="author-info" id="authorInfo">
+                        <img src="" id="authorAvatar" alt="Profile TikTok">
+                        <div class="author-text">
+                            <h4 id="authorName">Nama Akun</h4>
+                            <span id="soundTitle"><i class="fas fa-music"></i> Original Sound</span>
+                        </div>
+                    </div>
+
+                    <!-- Download Buttons -->
+                    <div class="download-actions">
+                        <button class="dl-btn magnetic" id="dlMp4"><i class="fas fa-video"></i> Download MP4</button>
+                        <button class="dl-btn magnetic" id="dlMp3"><i class="fas fa-music"></i> Download MP3</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Section Preset Search -->
+        <section class="preset-section glass">
+            <h2><i class="fas fa-search"></i> PRESETS</h2>
+            <p class="sub-text">Pencarian preset berdasarkan judul lagu, hashtag, atau caption</p>
+
+            <!-- Search Bar -->
+            <div class="preset-search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="presetSearchInput" placeholder="Cari judul lagu, hashtag, caption...">
+                <button id="presetSearchBtn" class="btn-search-preset magnetic">Cari</button>
+            </div>
+            
+            <!-- Quick Hashtags Chips -->
+            <div class="hashtag-chips">
+                <button class="chip active magnetic" data-tag="preset">#preset</button>
+                <button class="chip magnetic" data-tag="preset5mb">#preset5mb</button>
+                <button class="chip magnetic" data-tag="presetxml">#presetxml</button>
+                <button class="chip magnetic" data-tag="presetam">#presetam</button>
+            </div>
+
+            <!-- Grid Content Presets -->
+            <div class="preset-grid" id="presetGrid">
+                <!-- Preset Cards JS Output -->
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
