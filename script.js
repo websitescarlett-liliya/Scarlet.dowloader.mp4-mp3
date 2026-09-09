@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const TIKWM_BASE = 'https://www.tikwm.com';
     const CORS_PROXY = 'https://corsproxy.io/?';
 
-    // 1. Audio Click Sound & Ripple Setup
+    // 1. Audio Click Sound & Ripple Effect
     const clickSound = new Audio('https://www.soundjay.com/buttons/sounds/button-16a.mp3');
     
     function playClickSound() {
@@ -35,11 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
         element.appendChild(circle);
     }
 
-    // 2. Profile Photo Upload Handler
+    // 2. Profile Avatar & Username Manager (Penyimpanan Permanen LocalStorage)
     const profileBtn = document.getElementById('profileBtn');
     const imageInput = document.getElementById('imageInput');
     const profileImage = document.getElementById('profileImage');
+    const profileNameDisplay = document.getElementById('profileNameDisplay');
+    const editNameBtn = document.getElementById('editNameBtn');
 
+    // Memuat data tersimpan saat pertama kali dibuka
+    const savedAvatar = localStorage.getItem('scarlet_user_avatar');
+    const savedName = localStorage.getItem('scarlet_user_name');
+
+    if (savedAvatar && profileImage) {
+        profileImage.src = savedAvatar;
+    }
+    if (savedName && profileNameDisplay) {
+        profileNameDisplay.innerText = savedName;
+    }
+
+    // Edit Foto Profil
     if (profileBtn && imageInput) {
         profileBtn.addEventListener('click', () => imageInput.click());
 
@@ -48,9 +62,24 @@ document.addEventListener('DOMContentLoaded', () => {
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(evt) {
-                    profileImage.src = evt.target.result;
+                    const base64Image = evt.target.result;
+                    profileImage.src = base64Image;
+                    localStorage.setItem('scarlet_user_avatar', base64Image); // Simpan permanen
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Edit Nama Pengguna
+    if (editNameBtn && profileNameDisplay) {
+        editNameBtn.addEventListener('click', () => {
+            const currentName = profileNameDisplay.innerText;
+            const newName = prompt('Masukkan nama pengguna baru:', currentName);
+            if (newName && newName.trim() !== '') {
+                const trimmedName = newName.trim();
+                profileNameDisplay.innerText = trimmedName;
+                localStorage.setItem('scarlet_user_name', trimmedName); // Simpan permanen
             }
         });
     }
@@ -84,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Helper untuk auto download MP4 / MP3
+    // Helper Auto Download MP4 / MP3
     function triggerDownload(url, filename) {
         if (!url) return alert('Link download tidak tersedia.');
         const fullUrl = url.startsWith('http') ? url : `${TIKWM_BASE}${url}`;
@@ -152,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. Search Presets via TikWM Feed API (Proxy Fallback & CORS Fix)
+    // 6. Search Presets via TikWM Feed API
     const presetGrid = document.getElementById('presetGrid');
     const presetSearchInput = document.getElementById('presetSearchInput');
     const presetSearchBtn = document.getElementById('presetSearchBtn');
@@ -170,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const targetApi = `${TIKWM_BASE}/api/feed/search`;
             
-            // Coba fetch langsung dulu, jika gagal/CORS gunakan Proxy
             let res;
             try {
                 res = await fetch(targetApi, { method: 'POST', body: formData });
@@ -246,8 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Inisialisasi awal
     loadPresets('preset');
 });
-
-                
+                        
